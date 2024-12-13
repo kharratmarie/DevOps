@@ -35,6 +35,9 @@ pipeline {
                              returnStdout: true
                          ).trim()
 
+                         echo "Debug: EC2_PUBLIC_IP is '${EC2_PUBLIC_IP}'"
+
+
                          // Get RDS Endpoint
                          // Get RDS Endpoint
                          RDS_ENDPOINT = sh(
