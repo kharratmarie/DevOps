@@ -1,9 +1,7 @@
----
 - name: Basic Web Server Setup
   hosts: servers
   gather_facts: False
   become: yes
-
   tasks:
     - name: Ensure SSH connection is available
       ansible.builtin.wait_for:
@@ -14,7 +12,7 @@
         host: '{{ ansible_host | default(inventory_hostname) }}'
       vars:
         ansible_connection: local
-      become: no
+        become: no
 
     - name: Update apt cache manually
       apt:
@@ -25,6 +23,7 @@
       apt:
         name: nginx
         state: present
+
     - name: Start Nginx service
       service:
         name: nginx
@@ -34,6 +33,5 @@
     - name: Create index.html with "Hello, World!"
       copy:
         dest: /var/www/html/index.html
-        content: "Hello from ansible "
+        content: "Hello from ansible"
         mode: '0644'
-
